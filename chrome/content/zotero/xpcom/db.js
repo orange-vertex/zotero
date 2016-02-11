@@ -815,6 +815,14 @@ Zotero.DBConnection.prototype.executeSQLFile = Zotero.Promise.coroutine(function
 	var nonCommentRE = /^[^-]/;
 	var trailingCommentRE = /^(.*?)(?:--.+)?$/;
 	
+	Zotero.debug('=-=-=-=-=');
+	Zotero.debug(sql);
+	Zotero.debug('=-=-=-=-=');
+	Zotero.debug(sql.trim()
+		.replace(/;---/g, "TEMPSEMI")
+		.split("\n")
+		.filter(function (x) nonCommentRE.test(x)));
+	
 	sql = sql.trim()
 		// Ugly hack to parse triggers with embedded semicolons
 		.replace(/;---/g, "TEMPSEMI")
