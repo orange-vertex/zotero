@@ -1,4 +1,4 @@
--- 78
+-- 79
 
 -- Copyright (c) 2009 Center for History and New Media
 --                    George Mason University, Fairfax, Virginia, USA
@@ -21,7 +21,7 @@
 
 
 -- This file creates tables containing user-specific data for new users --
--- any changes made here must be mirrored in transition steps in schema.js::_migrateSchema()
+-- any changes made here must be mirrored in transition steps in schema.js::_migrateUserDataSchema()
 
 
 CREATE TABLE version (
@@ -134,9 +134,11 @@ CREATE INDEX itemTags_tagID ON itemTags(tagID);
 CREATE TABLE itemSeeAlso (
     itemID INT,
     linkedItemID INT,
+    seeAlsoTypeID INT DEFAULT 1,
     PRIMARY KEY (itemID, linkedItemID),
     FOREIGN KEY (itemID) REFERENCES items(itemID),
-    FOREIGN KEY (linkedItemID) REFERENCES items(itemID)
+    FOREIGN KEY (linkedItemID) REFERENCES items(itemID),
+    FOREIGN KEY (seeAlsoTypeID) REFERENCES seeAlsoTypes(seeAlsoTypeID)
 );
 CREATE INDEX itemSeeAlso_linkedItemID ON itemSeeAlso(linkedItemID);
 

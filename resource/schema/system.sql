@@ -1,4 +1,4 @@
--- 31
+-- 32
 
 -- Copyright (c) 2009 Center for History and New Media
 --                    George Mason University, Fairfax, Virginia, USA
@@ -147,6 +147,13 @@ CREATE TABLE fileTypeMimeTypes (
     FOREIGN KEY (fileTypeID) REFERENCES fileTypes(fileTypeID)
 );
 CREATE INDEX fileTypeMimeTypes_mimeType ON fileTypeMimeTypes(mimeType);
+
+-- Defines the possible related types (see also, citation)
+DROP TABLE IF EXISTS seeAlsoTypes;
+CREATE TABLE seeAlsoTypes (
+    seeAlsoTypeID INTEGER PRIMARY KEY,
+    seeAlsoType TEXT
+);
 
 -- Defines the possible creator types (contributor, editor, author)
 DROP TABLE IF EXISTS creatorTypes;
@@ -983,6 +990,9 @@ INSERT INTO baseFieldMappings VALUES (31, 109, 80); -- podcast/medium/audioFileT
 INSERT INTO baseFieldMappings VALUES (17, 110, 111); -- case/title/caseName
 INSERT INTO baseFieldMappings VALUES (20, 110, 112); -- statute/title/nameOfAct
 INSERT INTO baseFieldMappings VALUES (21, 110, 113); -- email/title/subject
+
+INSERT INTO seeAlsoTypes VALUES(1, "seeAlso");
+INSERT INTO seeAlsoTypes VALUES(2, "citation");
 
 INSERT INTO creatorTypes VALUES(1, "author");
 INSERT INTO creatorTypes VALUES(2, "contributor");

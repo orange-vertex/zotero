@@ -3499,6 +3499,10 @@ Zotero.Schema = new function(){
 				if (i == 78) {
 					Zotero.DB.query("CREATE INDEX IF NOT EXISTS creatorData_name ON creatorData(lastName, firstName)");
 				}
+				
+				if (i == 79) {
+					Zotero.DB.query("ALTER TABLE itemSeeAlso ADD COLUMN seeAlsoTypeID INT DEFAULT 1 REFERENCES seeAlsoTypes(seeAlsoTypeID)");
+				}
 			}
 			
 			_updateDBVersion('userdata2', toVersion);
